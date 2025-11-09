@@ -69,12 +69,12 @@ global_x = x
 
 
 # Heavily weighted toward sleeping
-idle_num = [1]                      # almost never idle
-idle_to_sleep_num = [2, 3, 4, 5]    # goes to sleep quickly
-sleep_nums = [6, 7, 8, 9, 10, 11, 12]  # long sleep cycle
-sleep_to_idle_num = [13, 14, 15, 16]            # rare wake-up
-walk_left_num = [17]                # very rare walking
-walk_right_num = [18]               # very rare walking
+idle_num = [1,2,3]                      # almost never idle
+idle_to_sleep_num = [ 4, 5, 6 ]    # goes to sleep quickly
+sleep_nums =  [7, 8, 9, 10, 11]  # long sleep cycle
+sleep_to_idle_num = [ 12, 13, 14 ]            # rare wake-up
+walk_left_num = [15, 16]                # very rare walking
+walk_right_num = [17,18]               # very rare walking
 
 
 def gif_work(cycle_local, frames, first_num, last_num):
