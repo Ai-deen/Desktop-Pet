@@ -1,0 +1,25 @@
+<!-- popup.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Focus Signal</title>
+  <style>
+    body { font-family: Inter, sans-serif; width: 300px; margin: 12px; }
+    label { display:block; margin-bottom:10px; }
+    .small { font-size:12px; color:#666; margin-top:8px; }
+    button { padding:8px 10px; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <h3>Focus Signal</h3>
+  <label>
+    <input type="checkbox" id="sendSnippet"> Allow short page snippets (optional)
+  </label>
+  <div class="small">If enabled, the extension will send a short sanitized snippet (max chars) to your local classifier. Keep off for strict privacy.</div>
+
+  <button id="openSettings">Open local server docs</button>
+  <div class="small" style="margin-top:12px">Local server: <code>http://127.0.0.1:5000/check</code></div>
+  <script src="popup.js"></script>
+</body>
+</html>
