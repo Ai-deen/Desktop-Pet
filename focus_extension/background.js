@@ -5,7 +5,7 @@ const LOCAL_SERVER = "http://127.0.0.1:5000/check"; // local classifier endpoint
 // Default settings
 const DEFAULTS = {
   sendSnippet: false,   // require explicit consent to send snippet
-  snippetMaxChars: 300  // max characters to send when enabled
+  snippetMaxChars: 1500  // max characters to send when enabled
 };
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -29,9 +29,25 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
         body: JSON.stringify(payload)
       }, 3000).then(res => res.json())
         .then(data => {
-          // Expected response shape: { action: "allow"|"warn"|"block", tag: "...", reason: "..." }
+          if (data.action === "block") {
+            chrome.tabs.update(sender.tab.id, { url: "about:blank" });
+            chrome.notifications.create({
+              type: "basic",
+              iconUrl: "icon128.png",
+              title: "Focus Mode",
+              message: "Blocked distracting site: " + msg.domain
+            });
+          } else if (data.action === "warn") {
+            chrome.notifications.create({
+              type: "basic",
+              iconUrl: "icon128.png",
+              title: "Focus Mode",
+              message: "⚠️ Stay mindful: " + data.reason
+            });
+          }
           sendResponse({ ok: true, data });
         })
+
         .catch(err => {
           console.warn("Local classifier unreachable:", err);
           sendResponse({ ok: false, error: String(err) });
