@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Focus Tab Groups",
+  "version": "1.0",
+  "description": "Automatically manage tab groups per task session.",
+  "permissions": ["tabs", "tabGroups", "storage"],
+  "host_permissions": [
+    "<all_urls>",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

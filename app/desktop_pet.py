@@ -4,14 +4,16 @@ import random
 import os
 import sys
 
-IMPATH = os.path.dirname(__file__)
+BASE = os.path.dirname(__file__)
+ASSET_DIR = os.path.join(BASE, "assets", "gifs")
+
 FILES = {
-    "idle": "idle.gif",
-    "idle_to_sleep": "idle_to_sleep.gif",
-    "sleep": "sleep.gif",
-    "sleep_to_idle": "sleep_to_idle.gif",
-    "walk_right": "walk_right.gif",
-    "walk_left": "walk_left.gif"
+    "idle": os.path.join(ASSET_DIR, "idle.gif"),
+    "idle_to_sleep": os.path.join(ASSET_DIR, "idle_to_sleep.gif"),
+    "sleep": os.path.join(ASSET_DIR, "sleep.gif"),
+    "sleep_to_idle": os.path.join(ASSET_DIR, "sleep_to_idle.gif"),
+    "walk_right": os.path.join(ASSET_DIR, "walk_right.gif"),
+    "walk_left": os.path.join(ASSET_DIR, "walk_left.gif"),
 }
 window = tk.Tk()
 window.overrideredirect(True)
@@ -21,9 +23,9 @@ PET_HEIGHT = 100
 START_X = window.winfo_screenwidth() - PET_WIDTH - 50
 GROUND_Y = window.winfo_screenheight() - PET_HEIGHT - 30
 
-if not os.path.isdir(IMPATH):
-    print("ERROR: IMPATH does not exist:", IMPATH)
-    sys.exit(1)
+for key, path in FILES.items():
+    if not os.path.isfile(path):
+        raise FileNotFoundError(f"ERROR: Expected file for '{key}' not found: {path}")
 
 def load_gif_frames(path):
     frames = []
@@ -37,25 +39,18 @@ def load_gif_frames(path):
             break
     return frames
 
-for key, fname in FILES.items():
-    full = os.path.join(IMPATH, fname)
-    if not os.path.isfile(full):
-        print(f"ERROR: Expected file for '{key}' not found: {full}")
-        sys.exit(1)
-
-
 
 window.config(highlightbackground='black')
 window.wm_attributes('-transparentcolor', 'black')
 label = tk.Label(window, bd=0, bg='black')
 label.pack()
 
-idle = load_gif_frames(os.path.join(IMPATH, FILES["idle"]))
-idle_to_sleep = load_gif_frames(os.path.join(IMPATH, FILES["idle_to_sleep"]))
-sleep = load_gif_frames(os.path.join(IMPATH, FILES["sleep"]))
-sleep_to_idle = load_gif_frames(os.path.join(IMPATH, FILES["sleep_to_idle"]))
-walk_right = load_gif_frames(os.path.join(IMPATH, FILES["walk_right"]))
-walk_left = load_gif_frames(os.path.join(IMPATH, FILES["walk_left"]))
+idle = load_gif_frames(FILES["idle"])
+idle_to_sleep = load_gif_frames(FILES["idle_to_sleep"])
+sleep = load_gif_frames(FILES["sleep"])
+sleep_to_idle = load_gif_frames(FILES["sleep_to_idle"])
+walk_right = load_gif_frames(FILES["walk_right"])
+walk_left = load_gif_frames(FILES["walk_left"])
 
 if not (idle and idle_to_sleep and sleep and sleep_to_idle and walk_right and walk_left):
     print("ERROR: One or more GIFs failed to load (no frames).")

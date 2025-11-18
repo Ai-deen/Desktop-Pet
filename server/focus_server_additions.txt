@@ -1,0 +1,22 @@
+from chrome_launcher import launch_chrome
+from save_tabs import save_tabs
+from restore_tabs import restore_tabs
+
+@app.route("/start_task", methods=["POST"])
+def start_task():
+    data = request.get_json(force=True)
+    task_name = data.get("task")
+
+    launch_chrome()          # start chrome
+    restore_tabs()           # restore last tabs
+
+    return {"status": "started", "task": task_name}
+
+@app.route("/end_task", methods=["POST"])
+def end_task():
+    data = request.get_json(force=True)
+    task_name = data.get("task")
+
+    save_tabs(task_name)     # store all open tabs
+
+    return {"status": "ended", "task": task_name}

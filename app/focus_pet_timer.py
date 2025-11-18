@@ -6,8 +6,12 @@ import pandas as pd
 from datetime import datetime, timedelta
 import os
 
-CSV_PATH = "focus_timetable.csv"
-MSG_FILE = "focus_ui_message.txt"
+# --- Define Base Path Correctly ---
+BASE = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE, "data")
+
+CSV_PATH = os.path.join(DATA_DIR, "focus_timetable.csv")
+MSG_FILE = os.path.join(DATA_DIR, "focus_ui_message.txt")
 
 class FocusTimerUI:
     def __init__(self):

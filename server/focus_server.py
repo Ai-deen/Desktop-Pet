@@ -3,12 +3,19 @@ from flask import Flask, request, jsonify
 import os, json, requests, re
 from nltk.corpus import stopwords
 import nltk
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 app = Flask(__name__)
 
 # ---- NLTK SETUP ----
 nltk.download('stopwords', quiet=True)
-STOPWORDS = set(stopwords.words('english'))
+try:
+    STOPWORDS = set(stopwords.words('english'))
+except LookupError:
+    nltk.download('stopwords')
+    STOPWORDS = set(stopwords.words('english'))
 
 def remove_stopwords(text):
     return " ".join([w for w in text.split() if w.lower() not in STOPWORDS])
@@ -21,7 +28,7 @@ def clean_snippet(snippet):
     snippet = snippet.replace("<s>", "").replace("</s>", "")
 
     # remove non-ascii/bad chars
-    snippet = "".join(ch if 32 <= ord(ch) <= 126 else " " for ch in snippet)
+    snippet = re.sub(r'[^ -~]', ' ', snippet)
 
     # collapse spaces
     snippet = " ".join(snippet.split())

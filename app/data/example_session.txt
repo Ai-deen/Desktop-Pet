@@ -1,0 +1,8 @@
+{
+    "task": "DSA Practice",
+    "tabs": [
+        "https://leetcode.com/problemset",
+        "https://www.geeksforgeeks.org",
+        "https://stackoverflow.com"
+    ]
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Focus Tab Groups</title>
+  <style>
+    body { font-family:sans-serif; width:260px; padding:12px; }
+    button, input, select { width:100%; padding:8px; margin-top:8px; }
+    #status { margin-top:10px; font-size:13px; color:#555; }
+  </style>
+</head>
+<body>
+
+  <h2>Tab Groups</h2>
+
+  <label>Choose Task:</label>
+  <select id="groupList"></select>
+
+  <button id="openBtn">Open Selected Group</button>
+
+  <hr>
+
+  <label>Save Current Window As:</label>
+  <input id="taskName" placeholder="Enter task name">
+  <button id="saveBtn">Save Tabs</button>
+
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
