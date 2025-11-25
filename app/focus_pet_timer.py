@@ -20,6 +20,9 @@ class FocusTimerUI:
         self.root.overrideredirect(True)
         self.root.attributes("-topmost", True)
         self.root.configure(bg="#1c1c1c")
+        self.is_mini = False
+        self.full_geometry = None
+        self.root.bind("<Double-1>", self.toggle_mini_mode)
 
         # draggable
         self.offset_x = 0
@@ -145,6 +148,50 @@ class FocusTimerUI:
                     self.show_message(msg)
                     last_message = msg
             time.sleep(1)
+
+    def toggle_mini_mode(self, event=None):
+        if not self.is_mini:
+            # Switch to mini mode
+            self.is_mini = True
+            self.full_geometry = self.root.geometry()
+
+            # Hide UI components except the timer
+            self.task_label.pack_forget()
+            self.time_label.pack_forget()
+            self.msg_label.pack_forget()
+            self.todo_label.pack_forget()
+            self.todo_text.pack_forget()
+
+            # Resize the window to small widget
+            self.root.geometry("150x40")
+
+            # Place it bottom-right
+            screen_w = self.root.winfo_screenwidth()
+            screen_h = self.root.winfo_screenheight()
+            self.root.geometry(f"150x40+{screen_w - 160}+{screen_h - 40}")
+
+            # Smaller font for timer
+            self.timer_label.config(font=("Consolas", 20, "bold"))
+
+        else:
+            # Restore full mode
+            self.is_mini = False
+
+            # Restore layout
+            self.task_label.pack(pady=3, padx=10)
+            self.timer_label.pack(pady=2)
+            self.time_label.pack(pady=2)
+            self.msg_label.pack(pady=3)
+            self.todo_label.pack(pady=(8, 0))
+            self.todo_text.pack(pady=3)
+
+            # Restore window geometry
+            if self.full_geometry:
+                self.root.geometry(self.full_geometry)
+
+            # Restore original timer font
+            self.timer_label.config(font=("Consolas", 18, "bold"))
+
 
     def run(self):
         self.root.mainloop()

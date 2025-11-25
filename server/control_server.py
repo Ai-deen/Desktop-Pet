@@ -56,6 +56,17 @@ def ack_cmd():
     ok = clear_pending(cmd_id)
     return jsonify({"ok": ok})
 
-if __name__ == "__main__":
+@app.route("/presence", methods=["POST"])
+def presence():
+    data = request.get_json(force=True)
+    print("Presence update:", data)
+    return jsonify({"ok": True})
+
+
+def start_tab_server():
     print("Control server running at http://127.0.0.1:5050")
     app.run(host="127.0.0.1", port=5050)
+
+if __name__ == "__main__":
+    start_tab_server()
+    

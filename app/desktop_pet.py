@@ -1,4 +1,4 @@
-# desktop_pet_resized.py - ready-to-run for resized cat gifs
+# desktop_pet.py
 import tkinter as tk
 import random
 import os
@@ -169,10 +169,23 @@ def on_release(event):
     drag_data["start_win_x"] = None
     drag_data["start_win_y"] = None
 
+is_top = True
+
+def toggle_top(event=None):
+    global is_top
+    is_top = not is_top
+
+    if is_top:
+        window.attributes("-topmost", True)
+    else:
+        window.attributes("-topmost", False)
+
+
 label.bind("<Button-3>", on_right_click)
 label.bind("<Button-1>", on_press)
 label.bind("<B1-Motion>", on_motion)
 label.bind("<ButtonRelease-1>", on_release)
+label.bind("<Double-Button-1>", toggle_top)
 
 window.geometry(f"{PET_WIDTH}x{PET_HEIGHT}+{START_X}+{GROUND_Y}")
 window.after(1, update, cycle, check, event_number, x)

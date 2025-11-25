@@ -193,7 +193,7 @@ class Scheduler:
                 time.sleep(5)
 
 
-def main():
+def start_timer_pet():
     pet_proc = open_subprocess(PET_SCRIPT)
     timer_proc = open_subprocess(TIMER_SCRIPT)
 
@@ -202,4 +202,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    start_timer_pet()

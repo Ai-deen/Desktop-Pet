@@ -1,3 +1,1 @@
-WORK: Applications
-Pomodoro 1/1
-25 minutes
+WORK: Personal Project (1/2)

@@ -56,7 +56,6 @@ def check():
     raw_snippet = data.get("snippet") or ""
 
     snippet = clean_snippet(raw_snippet)
-    print("[CLEANED SNIPPET]:", snippet[:1500], "...")
 
     # Quick blocklist
     if any(x in domain for x in ["netflix", "instagram", "reddit", "hotstar", "spotify"]):
@@ -169,8 +168,11 @@ def check():
             "pet_behavior": "relax",
             "message": "AI unavailable. Defaulting to allow."
         })
+    
 
-
-if __name__ == "__main__":
+def start_focus_server():
     print("🚀 Focus Server running on http://127.0.0.1:5000/check")
     app.run(host="127.0.0.1", port=5000)
+
+if __name__ == "__main__":
+    start_focus_server()
