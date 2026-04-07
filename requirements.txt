@@ -1,0 +1,9 @@
+Flask
+requests
+python-dotenv
+pandas
+opencv-python
+mediapipe>=0.10
+tabulate
+nltk
+numpy

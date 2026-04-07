@@ -1,5 +1,4 @@
 # focus_server.py
-from flask import Flask, request, jsonify
 import os
 import json
 import requests
@@ -8,9 +7,6 @@ import nltk
 from nltk.corpus import stopwords
 from dotenv import load_dotenv
 import logging
-import signal
-import subprocess
-import sys
 import os, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +18,6 @@ from app.utils.log_file import log_file
 # -------------------- ENV --------------------
 load_dotenv()
 
-app = Flask(__name__)
 
 
 # -------------------- LOGGING --------------------
@@ -75,15 +70,10 @@ MODEL_NAME = "google/gemma-2-9b-it"
 # -------------------------------------------------
 
 
-@app.route("/check", methods=["POST"])
-def check():
-    data = request.get_json(force=True)
-    logging.info(f"Incoming check: {data}")
-
-    domain = (data.get("domain") or "").lower()
-    title = (data.get("title") or "").lower()
-    raw_snippet = data.get("snippet") or ""
-    snippet = clean_snippet(raw_snippet)
+def check_focus(domain: str, title: str, snippet: str) -> dict:
+    domain = (domain or "").lower()
+    title = (title or "").lower()
+    snippet = clean_snippet(snippet or "")
 
     # Quick blocklist
     if any(x in domain for x in ["netflix", "instagram", "reddit", "hotstar", "spotify"]):
@@ -93,7 +83,7 @@ def check():
             "message": f"Blocked distracting site: {domain}"
         }
         logging.info(f"Quick blocklist triggered: {result}")
-        return jsonify(result)
+        return result
 
     prompt = f"""
     You are FocusAI, an agent controlling a productivity pet. Your job is to PROTECT the user's focus by being extremely strict.
@@ -205,49 +195,16 @@ def check():
                 "message": "AI output malformed—defaulting to warn."
             }
 
-        return jsonify(result)
+        return result
 
     except Exception as e:
         logging.error(f"OpenRouter error: {e}")
-        return jsonify({
+        return {
             "action": "allow",
             "pet_behavior": "relax",
             "message": "AI unavailable. Defaulting to allow."
-        })
+        }
 
 
 
-# -------------------- MAIN ENTRYPOINT --------------------
-def main():
-    logging.info("Focus Server starting at http://127.0.0.1:5000/check")
 
-    app.run(
-        host="127.0.0.1",
-        port=5000,
-        debug=False,
-        use_reloader=False
-    )
-
-
-# -------------------- GRACEFUL SHUTDOWN --------------------
-def _handle_signal(sig, frame):
-    logging.info(f"Focus server received signal {sig}, shutting down.")
-    exit(0)
-
-
-signal.signal(signal.SIGTERM, _handle_signal)
-signal.signal(signal.SIGINT, _handle_signal)
-
-
-# -------------------- SUBPROCESS ENTRY FOR GUI --------------------
-def start_focus_server():
-    """
-    Used by your GUI.
-    Starts this file in a separate subprocess.
-    """
-    script = os.path.abspath(__file__)
-    return subprocess.Popen([sys.executable, script])
-
-
-if __name__ == "__main__":
-    main()

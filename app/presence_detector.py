@@ -26,6 +26,7 @@ from mediapipe.tasks import python
 from tabulate import tabulate
 import csv
 import os
+from app.utils.log_file import log_file
 
 # -----------------------
 # USER CONFIG
@@ -33,7 +34,7 @@ import os
 MODEL_PATH = r"C:\Users\lahar\Downloads\desktop_pet_project - Copy\app\data\face_landmarker.task"  # <-- SET: full path to the face_landmarker .task model file
 SERVER_URL = "http://127.0.0.1:5050/presence"  # endpoint to receive status
 CAMERA_ID = 0
-LOG_PATH = "presence_log.csv"
+LOG_PATH = log_file("presence_log.csv")
 
 # thresholds (tweak if needed)
 AWAY_TIMEOUT = 5.0
@@ -402,7 +403,7 @@ def main():
                     cv2.putText(frame, "Status: AWAY", (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,200,255), 2)
 
             # show
-            cv2.imshow("Presence Detector (simple)", frame)
+            cv2.imshow("Presence Detector", frame)
             key = cv2.waitKey(1) & 0xFF
             if key == 27:
                 break

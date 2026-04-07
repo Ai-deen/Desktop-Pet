@@ -1,0 +1,130 @@
+{
+  "items": [
+    {
+      "name": "Headphones",
+      "price": 5000,
+      "time": 100,
+      "priority": "high",
+      "permanent_points": 268,
+      "flexible_points": 158
+    },
+    {
+      "name": "Keyboard",
+      "price": 3000,
+      "time": 70,
+      "priority": "low",
+      "permanent_points": 959,
+      "flexible_points": 687
+    }
+  ],
+  "history": [
+    {
+      "item_name": "Headphones",
+      "permanent": 67,
+      "flexible": 35,
+      "timestamp": "2026-01-09T11:26:10.236069"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 71,
+      "flexible": 43,
+      "timestamp": "2026-01-09T11:26:10.236069"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 2,
+      "flexible": 5,
+      "timestamp": "2026-01-09T11:26:23.722924"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 146,
+      "flexible": 63,
+      "timestamp": "2026-01-09T11:26:23.722924"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 4,
+      "flexible": 36,
+      "timestamp": "2026-01-09T11:26:33.538152"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 173,
+      "flexible": 3,
+      "timestamp": "2026-01-09T11:26:33.538152"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 38,
+      "flexible": 9,
+      "timestamp": "2026-01-09T12:14:45.137565"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 91,
+      "flexible": 78,
+      "timestamp": "2026-01-09T12:14:45.137565"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 20,
+      "flexible": 36,
+      "timestamp": "2026-01-09T12:14:48.248991"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 13,
+      "flexible": 147,
+      "timestamp": "2026-01-09T12:14:48.248991"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 30,
+      "flexible": 0,
+      "timestamp": "2026-01-30T11:43:35.873891"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 104,
+      "flexible": 82,
+      "timestamp": "2026-01-30T11:43:35.873891"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 3,
+      "flexible": 9,
+      "timestamp": "2026-01-30T11:43:46.501731"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 134,
+      "flexible": 70,
+      "timestamp": "2026-01-30T11:43:46.501731"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 65,
+      "flexible": 10,
+      "timestamp": "2026-02-01T14:27:05.841840"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 185,
+      "flexible": 20,
+      "timestamp": "2026-02-01T14:27:05.841840"
+    },
+    {
+      "item_name": "Headphones",
+      "permanent": 39,
+      "flexible": 18,
+      "timestamp": "2026-02-01T14:27:10.544366"
+    },
+    {
+      "item_name": "Keyboard",
+      "permanent": 42,
+      "flexible": 181,
+      "timestamp": "2026-02-01T14:27:10.544366"
+    }
+  ]
+}
