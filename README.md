@@ -48,6 +48,3 @@ python -m app.presence_detector
 python -m app.focus_pet_timer
 python -m app.desktop_pet
 ```
-
-
-If you want, I can now try to run a quick smoke-check (compile the Python files to check syntax).
