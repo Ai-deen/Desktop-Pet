@@ -49,18 +49,5 @@ python -m app.focus_pet_timer
 python -m app.desktop_pet
 ```
 
-## Notes and gotchas
-
-- `app/desktop_pet.py` expects GIFs under `app/assets/gifs/` and will raise an error if missing.
-- `app/presence_detector.py` requires a FaceLandmarker `.task` model and a working camera.
-- `server/focus_server.py` uses an external API (OpenRouter) — set `OPENROUTER_API_KEY` or the server will fallback to a permissive default.
-- There is no exhaustive `requirements.txt` lockfile — the provided `requirements.txt` lists packages inferred from the code; you may need to adjust package versions for your environment.
-
-## Suggested next steps
-
-- (Optional) I can patch `presence_detector.py` to look for a relative model path automatically.
-- Add a small PowerShell dev-run script to start the control server, focus server, and launcher in a predictable order.
-
----
 
 If you want, I can now try to run a quick smoke-check (compile the Python files to check syntax).
